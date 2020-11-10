@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<div>
+
+</div>
+<script type="module">
+    import {dateToString, dateToStringFactory, addMonth, addYear, DateHelper as DH} from "../src/date-tool.js";
+
+    showStr('当前时间: ', dateToString(new Date(), 'yyyy-MM-dd hh:mm:ss.SSS'));
+    showStr('---格式化---');
+    let date = new Date()
+    console.log('date', date.getTime())
+    showStr('12小时', dateToString(date, 'yyyy-MM-dd hh:mm:ss.SSS'));
+    showStr('24小时', dateToString(date, 'yyyy-MM-dd HH:mm:ss.SSS'));
+    showStr('12小时，小时不自动补零', dateToString(date, 'yyyy-MM-dd h:mm:ss.SSS'));
+    showStr('年月', dateToString(date, 'yyyy-MM-dd yy-MM-dd'));
+    showStr('---静态计算方法---');
+    showStr('+1月', dateToString(addMonth(new Date(), 1), 'yyyy-MM-dd hh:mm:ss.SSS'));
+    showStr('-1月', dateToString(addMonth(new Date(), -1), 'yyyy-MM-dd hh:mm:ss.SS'));
+    showStr('-24月', dateToString(addMonth(new Date(), -24), 'yyyy-MM-dd hh:mm:ss.S'));
+    showStr('-14年', dateToString(addYear(new Date(), -14), 'yyyy-MM-dd hh:mm:ss.SSS'));
+    showStr('+2年', dateToString(addYear(new Date('2000-02-29 00:00:00'), 2), 'yyyy-MM-dd hh:mm:ss.SSS'));
+    showStr('---工具实例---');
+    showStr(new DH(new Date()).addMonth(3).addDay(18).addYear(-21,true).dateToString('yyyy-MM-dd hh:mm:ss.SSS'));
+    showStr('---thunkify---');
+    let dtf = dateToStringFactory('yyyy-MM-dd !')
+    showStr(dtf(date));
+    showStr('---较早时间---');
+    showStr(dateToString(new Date(1), 'yyyy-MM-dd hh:m:s.SSS'));
+    showStr(dateToString(new Date(12), 'yyyy-MM-dd hh:m:s.SSS'));
+    showStr(dateToString(new Date(123), 'yyyy-MM-dd hh:m:s.SSS'));
+    showStr(dateToString(new Date(1234), 'yyyy-MM-dd hh:m:s.SSS'));
+
+    function showStr(...str) {
+        let div = document.createElement("div");
+        for (let value of str) {
+            let span = document.createElement('span');
+            span.style.display = 'inline-block'
+            span.style.width = '220px'
+            span.style.borderBottom='1px solid #ccc'
+            span.innerText = value;
+            div.appendChild(span);
+        }
+        document.body.appendChild(div);
+    }
+</script>
+</body>
+</html>
