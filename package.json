@@ -1,13 +1,15 @@
 {
-  "name": "datetool",
-  "version": "0.0.1-beta1",
+  "name": "@missthee/datetool",
+  "version": "0.0.1-beta2",
   "description": "An open source simple JavaScript Date library for formatting and processing",
-  "private": true,
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
+    "test": "nodeunit ./test/unit-test.js",
     "dev": "webpack-dev-server",
+    "watch": "webpack --watch",
     "express": "node test/server.js",
-    "package": "webpack",
+    "package": "webpack --mode=production",
+    "packagedev": "webpack --mode=development",
     "publish": "npm publish",
     "publishbeta": "npm publish --tag=beta",
     "unpublish": "npm unpublish --force"
@@ -18,7 +20,10 @@
   },
   "keywords": [
     "dateformat",
-    "datetool"
+    "datetool",
+    "date",
+    "javascript",
+    "js"
   ],
   "author": "missthee",
   "license": "ISC",
@@ -31,11 +36,13 @@
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-private-methods": "^7.12.1",
+    "@babel/plugin-transform-modules-umd": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "babel-loader": "^8.2.1",
     "express": "^4.17.1",
     "open": "^7.3.0",
+    "terser-webpack-plugin": "^5.0.3",
     "webpack": "^5.4.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"

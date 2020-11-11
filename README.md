@@ -4,11 +4,49 @@
 An open source simple JavaScript Date library for formatting and processing.
 
 ## Getting Started
+install by npm
+```
+npm i @missthee/datetool
+```
+use
 ```js
+import { dateToString, addDay, DateHepler } from "@missthee/datetool";
+let date = new Date('2000/01/01');
+//formatting
+console.log(dateToString(date, 'yyyy-MM-dd')); // 2000-01-01
+//processing
+//NOTICE: All calculation operations will change the incoming Date object
+let result = addDay(date, 1); 
+console.log(result); // 2000-01-02
+console.log(date);   // 2000-01-02
 ```
 
 ## Example
 ```js
+import {DateHelper, dateToStringFactory, dateToString, getFullDayInMonth, isLeapYear, addMillisecond, addSecond, addMinute, addHour, addDay, addMonth, addYear,} from "@missthee/datetool";
+let date = new Date('2000-01-01');
+
+//formatting
+dateToString(date, 'yyyyMMdd');     //20000101
+let dts = dateToStringFactory('yyyyMMdd');
+dts(date);                          //20000101
+dts(new Date('2020/11/11'));        //20201111
+
+//processing
+//NOTICE: All calculation operations will change the incoming Date object
+new DateHelper(date).addDay(1).addMonth(1).addYear(-1).getDate();
+addYear(date, 1);
+addMonth(date, 1);
+addDay(date, 1);
+addHour(date, 1);
+addMinute(date, 1);
+addSecond(date, 1);
+addMillisecond(date, 1);
+
+//misc
+isLeapYear(2000); //true
+getFullDayInMonth(2000, 1); //29
+
 ```
 
 ## Converting to String
@@ -31,9 +69,3 @@ An open source simple JavaScript Date library for formatting and processing.
 | SSS | The milliseconds of the second between .000-.999 | `000` - `999` |
 | SS | The milliseconds of the second between .00-.99 | `00` - `99` |
 | S | The milliseconds of the second between .0-.9 | `0` - `9` |
-
-## Misc
-```js
-isLeapYear(2008)                  // true|false. <static>
-getFullDayInMonth(2007, 9)           // 31 <static>
-```
