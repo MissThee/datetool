@@ -1,17 +1,24 @@
 {
   "name": "datetool",
-  "version": "1.0.0",
-  "description": "simple time formatting tool",
-  "main": "src/datetool.js",
+  "version": "0.0.1-beta1",
+  "description": "An open source simple JavaScript Date library for formatting and processing",
+  "private": true,
+  "main": "dist/index.js",
   "scripts": {
-    "test": "node test/server.js"
+    "dev": "webpack-dev-server",
+    "express": "node test/server.js",
+    "package": "webpack",
+    "publish": "npm publish",
+    "publishbeta": "npm publish --tag=beta",
+    "unpublish": "npm unpublish --force"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/MissThee/datetool.git"
   },
   "keywords": [
-    "dateformat"
+    "dateformat",
+    "datetool"
   ],
   "author": "missthee",
   "license": "ISC",
@@ -20,9 +27,18 @@
   },
   "homepage": "https://github.com/MissThee/datetool#readme",
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-private-methods": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.2.1",
     "express": "^4.17.1",
-    "open": "^7.3.0"
+    "open": "^7.3.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

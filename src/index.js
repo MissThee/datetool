@@ -51,7 +51,7 @@ export class DateHelper {
     }
 
     addMonth(value, isKeepMonthEnd = false) {
-        addMonth(this.#date, value)
+        addMonth(this.#date, value, isKeepMonthEnd)
         return this;
     }
 
@@ -68,10 +68,10 @@ export class DateHelper {
  */
 export function dateToStringFactory(fmt) {
     return function (date) {
-        if (!date || Object.prototype.toString.call(date) !== '[object Date]') {
+        if (!date || !checkType(date, 'date')) {
             throw 'unsupported date type';
         }
-        if (!fmt || Object.prototype.toString.call(fmt) !== '[object String]') {
+        if (!fmt || !checkType(fmt, 'String')) {
             return date.toString();
         } else {
             let year = date.getFullYear();
@@ -125,33 +125,33 @@ export function isLeapYear(year) {
 }
 
 export function addMillisecond(date, value) {
-    checkIntegerAndThrowError(value);
+    checkParam(date, value);
     return date.setTime(date.getTime() + value);
 }
 
 export function addSecond(date, value) {
-    checkIntegerAndThrowError(value);
+    checkParam(date, value);
     return date.setTime(date.getTime() + value * 1000);
 }
 
 export function addMinute(date, value) {
-    checkIntegerAndThrowError(value);
+    checkParam(date, value);
     return date.setTime(date.getTime() + value * 1000 * 60);
 }
 
 export function addHour(date, value) {
-    checkIntegerAndThrowError(value);
+    checkParam(date, value);
     return date.setTime(date.getTime() + value * 1000 * 60 * 60);
 }
 
 export function addDay(date, value) {
-    checkIntegerAndThrowError(value);
+    checkParam(date, value);
     console.log('day!!', date.getMilliseconds(), date.getTime())
     return date.setTime(date.getTime() + value * 1000 * 60 * 60 * 24);
 }
 
 export function addMonth(date, value, isKeepMonthEnd = false) {
-    checkIntegerAndThrowError(value);
+    checkParam(date, value);
     let dayInMonth = date.getDate()
     let month = date.getMonth()
     let year = date.getFullYear()
@@ -178,7 +178,7 @@ export function addMonth(date, value, isKeepMonthEnd = false) {
 }
 
 export function addYear(date, value, isKeepMonthEnd = false) {
-    checkIntegerAndThrowError(value);
+    checkParam(date, value);
     return addMonth(date, value * 12, isKeepMonthEnd);
 }
 
@@ -189,8 +189,11 @@ function checkType(obj, type) {
     return Object.prototype.toString.call(obj) === '[object ' + type.slice(0, 1).toUpperCase() + type.slice(1).toLowerCase() + ']'
 }
 
-function checkIntegerAndThrowError(type) {
-    if (!Number.isInteger(type)) {
-        throw 'param must be integer';
+function checkParam(date, value) {
+    if (!checkType(date, 'date')) {
+        throw 'date must be Date';
+    }
+    if (!Number.isInteger(value)) {
+        throw 'value must be Integer';
     }
 }
