@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/MissThee/datetool#readme",
   "devDependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "open": "^7.3.0"
+  },
+  "dependencies": {
   }
 }

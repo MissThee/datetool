@@ -166,7 +166,7 @@ export function addMonth(date, value, isKeepMonthEnd = false) {
         newMonth = newMonthTmp % 12 + 12
         newYear = date.getFullYear() - 1 + Math.ceil(newMonthTmp / 12);
     } else {
-        newMonth = date.getMonth();
+        newMonth = newMonthTmp;
         newYear = date.getFullYear();
     }
     let fullDayInMonth = getFullDayInMonth(year, month);
