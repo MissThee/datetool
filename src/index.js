@@ -99,8 +99,9 @@ function dateToStringFactory(fmt) {
                 'SS': millisecondStr.substr(0, 2),
                 'S': millisecondStr.substr(0, 1),
             }
-            let ret;
             for (let k in dateFormatObj) {
+                let ret;
+                // eslint-disable-next-line no-cond-assign
                 while (ret = new RegExp('(' + k + ')').exec(fmt)) {
                     fmt = fmt.replace(new RegExp(ret[1], 'g'), (ret[1].length === 1) ? dateFormatObj[k] : dateFormatObj[k].toString().padStart(ret[1].length, '0'));
                 }

@@ -11,7 +11,7 @@
     "package": "webpack --mode=production",
     "packagedev": "webpack --mode=development",
     "publish": "npm publish",
-    "publishbeta": "npm publish --tag=beta",
+    "publishbeta": "npm publish --tag=beta --access public",
     "unpublish": "npm unpublish --force"
   },
   "repository": {
@@ -40,6 +40,9 @@
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "babel-loader": "^8.2.1",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "open": "^7.3.0",
     "terser-webpack-plugin": "^5.0.3",
