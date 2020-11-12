@@ -40,32 +40,34 @@ this.test = {
         test.done();
     },
     addDay: (test) => {
-        console.log(d('2000/02/28'))
-        console.log(addDay(d('2000/02/28'), 1))
-        console.log('输出', dateToString(
-            addDay(d('2000/02/28'), 1)
-            , 'yyyy-MM-dd hh:mm:ss.SSS'));
+        // console.log(d('2000/02/28'))
+        // console.log(addDay(d('2000/02/28'), 1))
+        // console.log('输出', dateToString(
+        //     addDay(d('2000/02/28'), 1)
+        //     , 'yyyy-MM-dd hh:mm:ss.SSS'));
         test.ok(addDay(d('2000/02/28'), 1).toString() === ds('2000/02/29'), '+1天');
         test.ok(addDay(d('2000/02/29'), 1).toString() === ds('2000/03/01'), '+1天');
         test.done();
     },
-    readMe: (test) => {
-        let date = new Date('2000-01-01');
-        //NOTICE: All calculation operations will change the incoming Date object
-        new DateHelper(date).addDay(1).addMonth(1).addYear(-1).getDate();
-        addYear(date, 1);
-        addMonth(date, 1);
-        addDay(date, 1);
-        addHour(date, 1);
-        addMinute(date, 1);
-        addSecond(date, 1);
-        addMillisecond(date, 1);
-        let isLeapYearResult = isLeapYear(2000);
-        let fullDayInMonth = getFullDayInMonth(2000, 1);
-        dateToString(date, 'yyyyMMdd');
-        let dts = dateToStringFactory('yyyyMMdd');
-        dts(date);
-        dts(new Date());
-        test.done();
-    }
+    // readMe: (test) => {
+    //     let date = new Date('2000-01-01');
+    //     //NOTICE: All calculation operations will change the incoming Date object
+    //     new DateHelper(date).addDay(1).addMonth(1).addYear(-1).getDate();
+    //     addYear(date, 1);
+    //     addMonth(date, 1);
+    //     addDay(date, 1);
+    //     addHour(date, 1);
+    //     addMinute(date, 1);
+    //     addSecond(date, 1);
+    //     addMillisecond(date, 1);
+    //     let isLeapYearResult = isLeapYear(2000);
+    //     console.log(isLeapYearResult)
+    //     let fullDayInMonth = getFullDayInMonth(2000, 1);
+    //     console.log(fullDayInMonth)
+    //     dateToString(date, 'yyyyMMdd');
+    //     let dts = dateToStringFactory('yyyyMMdd');
+    //     dts(date);
+    //     dts(new Date());
+    //     test.done();
+    // }
 };

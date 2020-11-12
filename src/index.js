@@ -1,3 +1,23 @@
+const dateFormatKeyAndFunction = {
+    'yyyy': (t) => t.getFullYear(),
+    'yy': (t) => t.getFullYear().toString().substr(-2, 2),
+    'MM': (t) => t.getMonth() + 1,
+    'M': (t) => t.getMonth() + 1,
+    'dd': (t) => t.getDate(),
+    'd': (t) => t.getDate(),
+    'HH': (t) => t.getHours(),
+    'H': (t) => t.getHours(),
+    'hh': (t) => t.getHours() % 12,
+    'h': (t) => t.getHours() % 12,
+    'mm': (t) => t.getMinutes(),
+    'm': (t) => t.getMinutes(),
+    'ss': (t) => t.getSeconds(),
+    's': (t) => t.getSeconds(),
+    'SSS': (t) => t.getMilliseconds().toString().padStart(3, '0').substr(0, 3),
+    'SS': (t) => t.getMilliseconds().toString().padStart(3, '0').substr(0, 2),
+    'S': (t) => t.getMilliseconds().toString().padStart(3, '0').substr(0, 1),
+}
+
 class DateHelper {
 
     constructor(date = new Date()) {
@@ -78,33 +98,12 @@ function dateToStringFactory(fmt) {
         if (!fmt || !checkType(fmt, 'String')) {
             return date.toString();
         } else {
-            let year = date.getFullYear();
-            let month = date.getMonth();
-            let day = date.getDate();
-            let hour = date.getHours();
-            let minute = date.getMinutes();
-            let second = date.getSeconds();
-            let millisecond = date.getMilliseconds();
-            let millisecondStr = millisecond.toString().padStart(3, '0');
-            const dateFormatObj = {
-                'yyyy': year,
-                'yy': year.toString().substring(year.toString().length - 2),
-                'M+': month + 1,
-                'd+': day,
-                'H+': hour,
-                'h+': hour % 12,
-                'm+': minute,
-                's+': second,
-                'SSS': millisecondStr.substr(0, 3),
-                'SS': millisecondStr.substr(0, 2),
-                'S': millisecondStr.substr(0, 1),
-            }
-            for (let k in dateFormatObj) {
-                let ret;
-                // eslint-disable-next-line no-cond-assign
-                while (ret = new RegExp('(' + k + ')').exec(fmt)) {
-                    fmt = fmt.replace(new RegExp(ret[1], 'g'), (ret[1].length === 1) ? dateFormatObj[k] : dateFormatObj[k].toString().padStart(ret[1].length, '0'));
+            let dateFormatReplaceObj = {};
+            for (let k in dateFormatKeyAndFunction) {
+                if (dateFormatReplaceObj[k] === undefined) {
+                    dateFormatReplaceObj[k] = dateFormatKeyAndFunction[k](date)
                 }
+                fmt = fmt.replace(new RegExp(k, 'g'), dateFormatReplaceObj[k].toString().padStart(k.length, '0'));
             }
             return fmt;
         }
@@ -223,9 +222,13 @@ function checkType(obj, type) {
     return Object.prototype.toString.call(obj) === '[object ' + type.slice(0, 1).toUpperCase() + type.slice(1).toLowerCase() + ']'
 }
 
+function isValidDate(date) {
+    return date instanceof Date && !isNaN(date.getTime())
+}
+
 function checkParam(date, value) {
-    if (!checkType(date, 'date')) {
-        throw 'date must be Date';
+    if (!checkType(date, 'date') || !isValidDate(date)) {
+        throw 'date must be valid Date';
     }
     if (!Number.isInteger(value)) {
         throw 'value must be Integer';
