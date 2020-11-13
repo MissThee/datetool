@@ -87,7 +87,26 @@ class DateHelper {
 
 /**
  * dateToStringFactory
- * @param fmt String. If fmt isn't provided, the native Date.toString() function will be called
+ * @param {String} fmt. If fmt isn't provided, the native Date.toString() function will be called
+ * | Key   | Description                                       | Value         |
+ * | :---- | :----                                             | :----         |
+ * | yyyy  | The year                                          | `1999` `2001` |
+ * | yy    | The year's last two-digit number                  | `99` `01`     |
+ * | MM    | The month of the year with leading zero           | `01` - `12`   |
+ * | M     | The month of the year between 1-12                | `1` - `12`    |
+ * | dd    | The day of the month with leading zero            | `01` - `31`   |
+ * | d     | The day of the month between 1 and 31             | `1`  - `31`   |
+ * | HH    | The hour of the day with leading zero             | `00` - `23`   |
+ * | H     | The hour of the day between 0-23                  | `0` - `23`    |
+ * | hh    | The hour of the day with leading zero             | `01` - `12`   |
+ * | h     | The hour of the day between 1-12                  | `1` - `12`    |
+ * | mm    | The minute of the hour with leading zero          | `00` - `59`   |
+ * | m     | The minute of the hour between 0-59               | `0` - `59`    |
+ * | ss    | The seconds of the minute with leading zero       | `00` - `59`   |
+ * | s     | The seconds of the minute between 0-59            | `0` - `59`    |
+ * | SSS   | The milliseconds of the second between .000-.999  | `000` - `999` |
+ * | SS    | The milliseconds of the second between .00-.99    | `00` - `99`   |
+ * | S     | The milliseconds of the second between .0-.9      | `0` - `9`     |
  * @returns function(Date): String
  */
 function dateToStringFactory(fmt) {
@@ -95,7 +114,7 @@ function dateToStringFactory(fmt) {
         if (!date || !checkType(date, 'date')) {
             throw 'unsupported date type';
         }
-        if (!fmt || !checkType(fmt, 'String')) {
+        if (!fmt || !checkType(fmt, 'string')) {
             return date.toString();
         } else {
             let dateFormatReplaceObj = {};
@@ -112,15 +131,23 @@ function dateToStringFactory(fmt) {
 
 /**
  * format time
- * @param fmt String. If fmt isn't provided, the native Date.toString() function will be called
- * @param date Date
- * @returns String
+ * @param {String} fmt. If fmt isn't provided, the native Date.toString() function will be called
+ * @param {Date} date
+ * @returns {String}
  */
 function dateToString(date, fmt) {
     return dateToStringFactory(fmt)(date);
 }
 
+/**
+ * @param {Number} year
+ * @param {Number} month. ( 0 ~ 11 )
+ * @return {Number}
+ */
 function getFullDayInMonth(year, month) {
+    if (month < 0 || month > 11 || !Number.isInteger(month)) {
+        throw 'unknown month param' + month
+    }
     return [31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month]
 }
 
@@ -160,9 +187,9 @@ function addDay(date, value) {
 
 /**
  * addMonth
- * @param date Date
- * @param value Integer
- * @param isKeepMonthEnd Boolean
+ * @param {Date} date
+ * @param {Number} value
+ * @param {Boolean} isKeepMonthEnd
  * @example
  * When isKeepMonthEnd is true, if the date passed in is the end of the month, it remains the end of the month after calculation
  * addMonth(new Date('2000/02/28'), -1, true); --> 2000/01/31
@@ -201,9 +228,9 @@ function addMonth(date, value, isKeepMonthEnd = false) {
 
 /**
  * addYear
- * @param date Date
- * @param value Integer
- * @param isKeepMonthEnd Boolean
+ * @param {Date} date
+ * @param {Number} value
+ * @param {Boolean} isKeepMonthEnd
  * @example
  * When isKeepMonthEnd is true, if the date passed in is the end of the month, it remains the end of the month after calculation
  * addYear(new Date('2001/02/28'), -1, true); --> 2000/02/29

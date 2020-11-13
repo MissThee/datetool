@@ -1,6 +1,6 @@
 {
   "name": "@missthee/datetool",
-  "version": "0.0.1-beta2",
+  "version": "0.0.1-2",
   "description": "An open source simple JavaScript Date library for formatting and processing",
   "main": "src/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "express": "node test/server.js",
     "package": "webpack --mode=production",
     "packagedev": "webpack --mode=development",
-    "publish": "npm publish",
+    "publish": "npm publish --access public",
     "publishbeta": "npm publish --tag=beta --access public",
     "unpublish": "npm unpublish --force"
   },

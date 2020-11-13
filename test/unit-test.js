@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const {DateHelper, dateToStringFactory, dateToString, getFullDayInMonth, isLeapYear, addMillisecond, addSecond, addMinute, addHour, addDay, addMonth, addYear} = require("../src/index.js");
 
 function d(value) {
@@ -21,12 +22,12 @@ this.test = {
     },
     addMonth: (test) => {
         // console.log(dateToString(addMonth(new Date('2020/02/28'), 13), 'yyyy-MM-dd hh:mm:ss.SSS'));
-        test.ok(addMonth(d('2020/02/28'), 1).toString() === ds('2020/03/28'), '+1月');
-        test.ok(addMonth(d('2020/02/28'), 6).toString() === ds('2020/08/28'), '+6月');
-        test.ok(addMonth(d('2020/02/28'), 13).toString() === ds('2021/03/28'), '+13月');
-        test.ok(addMonth(d('2020/02/28'), -1).toString() === ds('2020/01/28'), '-1月');
-        test.ok(addMonth(d('2020/02/28'), -6).toString() === ds('2019/08/28'), '-6月');
-        test.ok(addMonth(d('2020/02/28'), -13).toString() === ds('2019/01/28'), '-13月');
+        test.ok(addMonth(d('2001/02/28'), 1).toString() === ds('2001/03/28'), '+1月');
+        test.ok(addMonth(d('2001/02/28'), 6).toString() === ds('2001/08/28'), '+6月');
+        test.ok(addMonth(d('2001/02/28'), 13).toString() === ds('2002/03/28'), '+13月');
+        test.ok(addMonth(d('2001/02/28'), -1).toString() === ds('2001/01/28'), '-1月');
+        test.ok(addMonth(d('2001/02/28'), -6).toString() === ds('2000/08/28'), '-6月');
+        test.ok(addMonth(d('2001/02/28'), -13).toString() === ds('2000/01/28'), '-13月');
         test.done();
     },
     addMonthWithDayEdge: (test) => {
@@ -49,6 +50,13 @@ this.test = {
         test.ok(addDay(d('2000/02/29'), 1).toString() === ds('2000/03/01'), '+1天');
         test.done();
     },
+    month: (test) => {
+        test.ok(getFullDayInMonth(2021, 1) === 28, '2021-02整月天数')
+        test.ok(getFullDayInMonth(2020, 0) === 31, '2020-01整月天数')
+        test.ok(getFullDayInMonth(2020, 11) === 31, '2020-12整月天数')
+        test.ok(getFullDayInMonth(2000, 1) === 29, '2000-02整月天数')
+        test.done()
+    }
     // readMe: (test) => {
     //     let date = new Date('2000-01-01');
     //     //NOTICE: All calculation operations will change the incoming Date object
